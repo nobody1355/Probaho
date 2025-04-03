@@ -1,0 +1,111 @@
+<!-- app/auth/register.html -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Register</title>
+    <!-- Link to the register page style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <script>
+        const defaultImageUrl = "{{ url_for('static', filename='images/login_register/userImageDefault.png') }}";
+    </script>
+</head>
+
+<body>
+    <!-- Floating Header (same as index, without login button) -->
+    {% include 'auth/header.html' %} 
+
+    <!-- Register Form Container -->
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <!-- Form Sections -->
+            <div class="form-content">
+                <!-- Left Side: User Details -->
+                <div class="form-left">
+                    <!-- Username Input -->
+                    <input type="text" name="username" placeholder="Username" required>
+
+                    <!-- Email Input -->
+                    <input type="email" name="email" placeholder="Email" required>
+
+                    <!-- Password Input -->
+                    <input type="password" name="password" placeholder="Password" required>
+
+                    <!-- Location Dropdown -->
+                    <select name="location" required>
+                        <option value="">Select Location</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Barisal">Barisal</option>
+                    </select>
+
+                    <!-- Business Type Dropdown -->
+                    <select name="business_type" required>
+                        <option value="">Select Business Type</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="Grocery">Grocery</option>
+                        <option value="Pharmacy">Pharmacy</option>
+                    </select>
+                </div>
+
+                <!-- Right Side: Image Upload -->
+                <div class="form-right">
+                    <!-- Image Upload Section -->
+                    <label for="user_image">Choose User Image</label>
+                    <input type="file" name="user_image" id="user_image" accept="image/*"
+                        onchange="previewImage(event)">
+
+                    <!-- Display Profile Image after Upload -->
+                    <div class="profile-img-wrapper">
+                        <img id="profile-img-preview"
+                            src="{{ url_for('static', filename='images/login_register/userImageDefault.png') }}"
+                            alt="Profile Image Preview">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+        </form>
+
+        <!-- Flash Messages (if any) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Sign In Link -->
+        <p>Already have an account? <a href="{{ url_for('auth.login') }}" class="sign-in-btn">Sign In</a></p>
+    </div>
+
+    <!-- Link to External JavaScript File -->
+    <script src="{{ url_for('static', filename='javascript/register.js') }}"></script>
+    <!-- Inline JavaScript to Handle Image Preview -->
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('profile-img-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    preview.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = defaultImageUrl; // Use the JavaScript variable instead of Jinja syntax here
+            }
+        }
+    </script>
+</body>
+
+</html>

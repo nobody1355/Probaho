@@ -1,0 +1,107 @@
+<!--TIG Added line 15-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Probaho WebApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='javascript/index.js') }}" defer></script>
+</head>
+<body>
+
+    <!-- Floating Header Section -->
+    <header class="floating-header">
+        {% include 'headerindex.html' %}
+    </header>
+
+    <!-- First Section: Welcome -->
+    <section class="welcome-section" data-bg="{{ url_for('static', filename='images/index/B1.jpg') }}">
+        <div class="content">
+            <h1 class="welcome-text animate-fade-in">Probaho - A shop owner's go-to management tool.</h1>
+        </div>
+        <img src="{{ url_for('static', filename='images/index/Animation1.gif') }}" alt="Overlay Image" class="overlay-image">
+    </section>
+    
+
+    <!-- Second Section: Features -->
+    <section id="features" class="features-section" data-bg="{{ url_for('static', filename='images/index/B2.jpg') }}">
+        <h2 class="section-title animate-slide-in">Our Features</h2>
+    </div>
+    <img src="{{ url_for('static', filename='images/index/Animation2.gif') }}" alt="Overlay Image" class="overlay-image-2">
+        <div class="feature-boxes">
+            <!-- Feature 1: Inventory Management -->
+            <div class="feature-box animate-fade-in">
+                <img src="{{ url_for('static', filename='images/index/INVM.gif') }}" alt="Inventory Management" class="feature-image">
+                <div class="feature-text">
+                    <h3>Inventory Management</h3>
+                    <p>Keep track of your stock levels, sales, and purchases with ease.</p>
+                </div>
+            </div>
+            <!-- Feature 2: Real-Time Updates -->
+            <div class="feature-box animate-fade-in">
+                <img src="{{ url_for('static', filename='images/index/Animation2.gif') }}" alt="Real-Time Updates" class="feature-image">
+                <div class="feature-text">
+                    <h3>Real-Time Updates</h3>
+                    <p>Stay informed with real-time updates on your sales and inventory.</p>
+                </div>
+            </div>
+            <!-- Feature 3: Billing Tracking -->
+            <div class="feature-box animate-fade-in">
+                <img src="{{ url_for('static', filename='images/index/BILLT.gif') }}" alt="Billing Tracking" class="feature-image">
+                <div class="feature-text">
+                    <h3>Billing Tracking</h3>
+                    <p>Track invoices and payments efficiently to stay on top of your finances.</p>
+                </div>
+            </div>
+            <!-- Feature 4: Multi-Business Support -->
+            <div class="feature-box animate-fade-in">
+                <img src="{{ url_for('static', filename='images/index/MULTIB.gif') }}" alt="Multi-Business Support" class="feature-image">
+                <div class="feature-text">
+                    <h3>Multi-Business Support</h3>
+                    <p>Manage multiple businesses seamlessly from one dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Third Section: Company Details -->
+    <section class="company-details" data-bg="{{ url_for('static', filename='images/index/B1.jpg') }}">
+        <h2 class="section-title animate-slide-in">About Our Company</h2>
+        <div class="company-detail-boxes">
+            <img src="{{ url_for('static', filename='images/index/Animation3.gif') }}" alt="Overlay Image" class="overlay-image-2">
+            <div class="company-detail-box animate-fade-in">
+                <div class="company-image">
+                    <img src="{{ url_for('static', filename='images/index/TRS.gif') }}" alt="Detail 1">
+                </div>
+                <div class="company-text">
+                    <p>Probaho is trusted by thousands of shop owners for seamless management.</p>
+                </div>
+            </div>
+            <div class="company-detail-box animate-fade-in">
+                <div class="company-image">
+                    <img src="{{ url_for('static', filename='images/index/SMLS.gif') }}" alt="Detail 2">
+                </div>
+                <div class="company-text">
+                    <p>Our mission is to simplify business operations for everyone.</p>
+                </div>
+            </div>
+            <div class="company-detail-box animate-fade-in">
+                <div class="company-image">
+                    <img src="{{ url_for('static', filename='images/index/JOINUS.gif') }}" alt="Detail 3">
+                </div>
+                <div class="company-text">
+                    <p>Join us in revolutionizing business management across industries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Probaho WebApp. All rights reserved. UH, UBM, TIG, NUA, RAR</p>
+    </footer>
+
+</body>
+</html>

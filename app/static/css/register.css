@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url("/static/images/login_register/Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to the top to leave space for floating header */
+    padding: 20px;
+    position: relative; /* Allow header to float over the content */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Floating Header */
+.floating-header {
+    background: linear-gradient(to right, #007bff 0%, #ffffff 100%); /* Gradient from blue to white */
+    padding: 30px 30px; /* Increased padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 30px; /* Added space from the top */
+    left: 85px; /* Added space from the left */
+    right: 25px; /* Added space from the right */
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    opacity: 0.95; /* Slight fade effect */
+    width: 85%;
+}
+
+/* Ensure Probaho text is white */
+.floating-header h1 {
+    color: rgb(255, 255, 255);  /* Set the text color to white */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Ensure no extra margin around the text */
+    line-height: 1; /* Ensures proper alignment with the logo */
+}
+
+/* Logo and Text */
+.logo-text a {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Ensures it inherits the color of the parent element */
+    display: flex; /* Aligns logo and text properly */
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.center-links {
+    display: flex;
+    gap: 20px;
+}
+
+.center-links .link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+
+    text-shadow: 
+    -1.5px -1.5px 0 white, /* Top-left */
+    1.5px -1.5px 0 white,  /* Top-right */
+    -1.5px 1.5px 0 white,  /* Bottom-left */
+    1.5px 1.5px 0 white;   /* Bottom-right */
+}
+
+/* Hover effects for navigation links */
+.center-links .link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.center-links .link:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.center-links .link:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* Register Form Container - White box with transparency */
+.container {
+    width: 85%;
+    max-width: 800px; /* Maximum width of container */
+    max-height: auto;
+    background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: 120px; /* Increased margin-top to give more space between header and form */
+}
+
+/* Title Styling */
+h1 {
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: #007bff; /* Set the title text color to blue */
+}
+
+/* Form Content: Left & Right Sections */
+.form-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Left Side (User Details) */
+.form-left {
+    width: 45%;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus Effect for Input Fields */
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05); /* Grow on focus */
+}
+
+/* Right Side (Image Upload) */
+.form-right {
+    width: 45%;
+    text-align: left;
+}
+
+label {
+    font-size: 16px;
+    color: #007bff;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Profile Image Upload */
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+}
+
+/* Profile Image Preview Box */
+.profile-img-wrapper {
+    width: 100%;
+    height: 250px;
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.profile-img-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Submit Button Styling */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Grow on hover */
+}
+
+/* Sign In Button Styling */
+.sign-in-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff; /* Set the sign-in button text color to blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Sign In Button Hover Effect */
+.sign-in-btn:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Message Display for Flash Messages */
+ul {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+ul li {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .form-content {
+        flex-direction: column;
+    }
+
+    .form-left, .form-right {
+        width: 100%;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"], button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Adjust floating header on smaller screens */
+    .floating-header {
+        padding: 10px 15px; /* Less padding for smaller screens */
+        flex-direction: column;
+        align-items: flex-start;
+        left: 15px;
+        right: 15px;
+    }
+
+    .floating-header .header-buttons {
+        margin-top: 10px;
+        gap: 15px;
+    }
+}

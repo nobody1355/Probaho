@@ -1,0 +1,208 @@
+/* documentation.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    scroll-behavior: smooth;
+    background-size: cover;
+    background-position: center;
+    transition: background 1s ease-in-out;
+}
+
+/* Floating Header */
+.floating-header {
+    background: linear-gradient(to right, #007bff 0%, #ffffff 100%); /* Gradient from blue to white */
+    padding: 30px 30px; /* Increased padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 30px; /* Added space from the top */
+    left: 85px; /* Added space from the left */
+    right: 25px; /* Added space from the right */
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    opacity: 0.95; /* Slight fade effect */
+    width: 85%;
+}
+
+/* Ensure Probaho text is white */
+.floating-header h1 {
+    color: rgb(255, 255, 255);  /* Set the text color to white */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Ensure no extra margin around the text */
+    line-height: 1; /* Ensures proper alignment with the logo */
+}
+
+/* Logo and Text */
+.logo-text a {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Ensures it inherits the color of the parent element */
+    display: flex; /* Aligns logo and text properly */
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.center-links {
+    display: flex;
+    gap: 20px;
+}
+
+.center-links .link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects for navigation links */
+.center-links .link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.center-links .link:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.center-links .link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Header Buttons */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons .btn {
+    text-decoration: none;
+    color: #ffffff;
+    background: #007BFF;
+    padding: 10px 20px;
+    border-radius: 30px; /* Rounded button shape */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for the button */
+    transition: background 0.3s, transform 0.3s;
+}
+
+/* Hover effects for buttons */
+.header-buttons .btn:hover {
+    text-decoration: none;
+    color: #007BFF;
+    background: #ffffff;
+    transform: translateY(-3px); /* Button lift effect */
+}
+
+.header-buttons .btn:active {
+    transform: translateY(1px); /* Button press effect */
+}
+
+
+
+/* Documentation Section */
+.documentation {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+.documentation h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007BFF;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
+}
+
+/* Section Titles */
+.documentation h2 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333;
+    border-left: 4px solid #007BFF;
+    padding-left: 10px;
+}
+
+/* Paragraph Styling */
+.documentation p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Links */
+.documentation a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.documentation a:hover {
+    text-decoration: underline;
+}
+
+/* Section Styles */
+section {
+    padding: 40px 20px;
+    text-align: left;
+    background-color: #f4f7fc;
+    margin-top: auto;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .documentation {
+        padding: 15px;
+    }
+
+    .documentation h1 {
+        font-size: 2rem;
+    }
+
+    .documentation h2 {
+        font-size: 1.5rem;
+    }
+
+    .documentation p {
+        font-size: 0.9rem;
+    }
+}

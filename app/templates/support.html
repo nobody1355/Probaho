@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Support - Probaho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/support.css') }}">
+</head>
+<body>
+    
+        <section>
+            <header class="floating-header">
+                {% include 'headerindex.html' %}
+        </header>
+    </section>
+    </header>
+    <main>
+        <section class="support">
+            <h1>Support</h1>
+            <p>We're here to help you get the most out of Probaho. Reach out to us anytime!</p>
+
+            <h2>Contact Us</h2>
+            <p>Email: <a href="mailto:support@probaho.com">support@probaho.com</a></p>
+            <p>Phone: +1-800-555-PROB</p>
+
+            <h2>Frequently Asked Questions</h2>
+            <p>Visit our <a href="{{ url_for('main.documentation') }}">Documentation</a> page to find quick answers to common questions.</p>
+
+            <h2>Technical Support</h2>
+            <p>Having technical issues? Submit a ticket with details of the issue, and we will reach out to you.</p>
+
+            <h2>Feedback</h2>
+            <p>We value your input! Share your suggestions or report issues at <a href="mailto:feedback@probaho.com">feedback@probaho.com</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Probaho WebApp. All rights reserved. UH, UBM, TIG, NUA, RAR</p>
+    </footer>
+</body>
+</html>

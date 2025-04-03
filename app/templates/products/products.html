@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Manage Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+    <script src="{{ url_for('static', filename='javascript/date-time.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/dashboard.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/products.js') }}" defer></script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    {% include 'sidebar/sidebar.html' %}
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header class="header">
+            <h1 class="header-title">Products</h1>
+            <div class="header-right">
+                <div class="header-date-time" id="date-time"></div> <!-- Date and Time display -->
+                <div class="user-btn">
+                    <img src="images/user.jpg" alt="User Image" class="user-img">
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container mt-5">
+            <h1 class="mb-4">Manage Products</h1>
+
+            <!-- Add Product Form -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Add Product</div>
+                        <div class="card-body">
+                            <form action="{{ url_for('products.add_product') }}" method="POST" enctype="multipart/form-data" id="addProductForm">
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="productName" name="prodName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productCategory" class="form-label">Category</label>
+                                    <select class="form-select" id="productCategory" name="catID" required>
+                                        {% for category in categories %}
+                                        <option value="{{ category[0] }}">{{ category[1] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="productPrice" name="prodPrice" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productStock" class="form-label">Stock</label>
+                                    <input type="number" class="form-control" id="productStock" name="prodStock" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productDescription" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="productDescription" name="prodDescription">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="productBarcode" class="form-label">Barcode ID</label>
+                                    <input type="text" class="form-control" id="productBarcode" name="barcode_value">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                                    <input type="date" class="form-control" id="expiryDate" name="expiryDate">
+                                </div>
+
+                                <!-- Barcode Input (Hidden initially) -->
+                                <input type="hidden" id="barcode_value" name="barcode_value" value="">
+
+                                <button type="submit" class="btn btn-primary">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scanner Section -->
+                <div class="col-md-7">
+                    <div class="card mt-4" id="scanner-container">
+                        <div class="card-header">Product Scanner</div>
+                        <div class="container">
+                            <video id="scanner" width="400" height="300"></video>
+                            <div class="input-group">
+                                <input type="text" id="result" placeholder="Scanned barcode will appear here" readonly>
+                                <button id="rescan-btn" class="btn btn-secondary">Rescan</button>
+                            </div>
+                        </div>
+
+                        <!-- Quagga.js Library -->
+                        <script src="https://unpkg.com/quagga@0.12.1/dist/quagga.min.js"></script>
+
+                        <script>
+                            let scanningActive = false; // Track whether scanning is active
+
+                            // Initialize the Quagga barcode scanning library
+                            function startScanner() {
+                                if (scanningActive) return; // Prevent starting multiple scanners
+                                scanningActive = true; // Set scanning as active
+                                // Access the video stream and show it as a live preview
+                                navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+                                    .then(function(stream) {
+                                        let videoElement = document.getElementById('scanner');
+                                        videoElement.srcObject = stream; // Set the video stream as the source for the video element
+                                        videoElement.play(); // Start playing the video
+                                    })
+                                    .catch(function(err) {
+                                        console.error("Error accessing the camera: ", err);
+                                    });
+
+                                // Initialize Quagga for barcode scanning
+                                Quagga.init({
+                                    inputStream: {
+                                        name: "Live",
+                                        type: "LiveStream",
+                                        target: document.querySelector('#scanner'), // The same video element
+                                        constraints: {
+                                            facingMode: "environment" // Use the rear camera (if available)
+                                        }
+                                    },
+                                    decoder: {
+                                        readers: ["code_128_reader", "ean_reader", "ean_8_reader", "upc_reader"] // Specify barcode types
+                                    },
+                                }, function(err) {
+                                    if (err) {
+                                        console.error(err);
+                                        return;
+                                    }
+                                    Quagga.start(); // Start scanning when everything is ready
+                                });
+
+                                // Event listener to capture barcode detection result
+                                Quagga.onDetected(function(result) {
+                                    let barcode = result.codeResult.code;
+                                    document.getElementById('result').value = barcode; // Display barcode in the input field
+                                    document.getElementById('productBarcode').value = barcode; // Update the barcode_value input
+                                    // Stop scanning after the first barcode detection
+                                    // Quagga.stop();// Active/Deactivate scanning
+                                    // scanningActive = false; // Active/Deactivate scanning
+                                    console.log("Barcode detected and scanning stopped.");
+                                });
+                            }
+
+                            // Rescan button functionality to restart the scanner
+                            document.getElementById('rescan-btn').addEventListener('click', function() {
+                                // Clear previous result
+                                document.getElementById('result').value = '';
+                                document.getElementById('productBarcode').value = ''; // Clear barcode input field
+                                // Restart the scanner
+                                startScanner();
+                            });
+
+                            // Update barcode fields in real-time when typing in #result field
+                            document.getElementById('result').addEventListener('input', function() {
+                                var scannedBarcode = document.getElementById('result').value;
+                                document.getElementById('productBarcode').value = scannedBarcode; // Sync with the barcode field
+                            });
+
+                            // Update #result field in real-time when typing in #productBarcode field
+                            document.getElementById('productBarcode').addEventListener('input', function() {
+                                var manualBarcode = document.getElementById('productBarcode').value;
+                                document.getElementById('result').value = manualBarcode; // Sync with the result field
+                            });
+
+                            // Start the scanner when the page is loaded
+                            window.onload = function() {
+                                startScanner();
+                            };
+                        </script>
+                    </div>
+                </div>
+
+                <form method="GET" action="{{ url_for('products.search_product') }}" class="form-inline mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="searchTerm" class="font-weight-bold">Search by Name or Description</label>
+                            <input type="text" id="searchTerm" name="searchTerm" class="form-control" placeholder="Enter product name or description">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="expiryDate" class="font-weight-bold">Filter by Expiry Date</label>
+                            <input type="date" id="expiryDate" name="expiryDate" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                
+            </div>
+
+            <!-- Existing Products -->
+            <h2 class="mb-4">Existing Products</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S.L</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Expiry Date</th>
+                        <th>Description</th>
+                        <th>Barcode ID</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ loop.index }}</td> 
+                        <td>{{ product[1] }}</td>
+                        <td>{{ product[2] }}</td>
+                        <td>{{ product[3] }}</td>
+                        <td>{{ product[6] }}</td>
+                        <td>{{ product[4] }}</td>
+                        <td>{{ product[5] }}</td>
+                        <td>{{ product[7] }}</td>
+                        <td>
+                            <a href="{{ url_for('products.edit_product', prod_id=product[0]) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ url_for('products.delete_product', prod_id=product[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

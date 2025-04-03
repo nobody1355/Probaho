@@ -1,0 +1,487 @@
+/* static/css/index.css */
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    scroll-behavior: smooth;
+    background-size: cover;
+    background-position: center;
+    transition: background 1s ease-in-out;
+}
+
+/* Floating Header */
+.floating-header {
+    background: linear-gradient(to right, #007bff 0%, #ffffff 100%); /* Gradient from blue to white */
+    padding: 30px 30px; /* Increased padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 30px; /* Added space from the top */
+    left: 85px; /* Added space from the left */
+    right: 25px; /* Added space from the right */
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    opacity: 0.95; /* Slight fade effect */
+    width: 85%;
+}
+
+/* Ensure Probaho text is white */
+.floating-header h1 {
+    color: rgb(255, 255, 255);  /* Set the text color to white */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Ensure no extra margin around the text */
+    line-height: 1; /* Ensures proper alignment with the logo */
+}
+
+/* Logo and Text */
+.logo-text a {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Ensures it inherits the color of the parent element */
+    display: flex; /* Aligns logo and text properly */
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.center-links {
+    display: flex;
+    gap: 20px;
+}
+
+.center-links .link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects for navigation links */
+.center-links .link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.center-links .link:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.center-links .link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Header Buttons */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons .btn {
+    text-decoration: none;
+    color: #ffffff;
+    background: #007BFF;
+    padding: 10px 20px;
+    border-radius: 30px; /* Rounded button shape */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for the button */
+    transition: background 0.3s, transform 0.3s;
+}
+
+/* Hover effects for buttons */
+.header-buttons .btn:hover {
+    text-decoration: none;
+    color: #007BFF;
+    background: #ffffff;
+    transform: translateY(-3px); /* Button lift effect */
+}
+
+.header-buttons .btn:active {
+    transform: translateY(1px); /* Button press effect */
+}
+
+/* Sections */
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding-top: 120px; /* Added top padding to ensure sections are not hidden under the fixed header */
+}
+
+/* Welcome Section */
+.welcome-section {
+    padding: 50px 30px;
+    position: relative;
+    align-items: center;
+    background-size: 100%;
+}
+
+/* Overlay Image */
+.overlay-image {
+    position: absolute;
+    bottom: 20px; /* Adjust the vertical position */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset for perfect centering */
+    max-width: 40%; /* Scale the image size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 0; /* Ensure it's above the background but below other content */
+    opacity: 0.5; /* Optional: Make it slightly transparent */
+}
+
+/* Content (Text) */
+.content {
+    z-index: 2; /* Ensure text appears above the overlay image */
+    color: #fff; /* Contrast with the overlay */
+}
+
+.welcome-text {
+    font-size: 3.2em;
+    color: #007bff;
+    position: relative;
+    animation: pulseText 2s waveText, waveText 1.5s ease-in-out infinite; /* Added waveText animation */
+    font-weight: bold;
+    display: inline-block;
+    white-space: nowrap;
+
+    text-shadow: 
+    -3px -3px 0 white, /* Top-left */
+    3px -3px 0 white,  /* Top-right */
+    -3px 3px 0 white,  /* Bottom-left */
+    3px 3px 0 white;   /* Bottom-right */
+}
+
+@media (max-width: 768px) {
+    .overlay-image {
+        max-width: 50%; /* Adjust the size for smaller screens */
+    }
+
+    .welcome-text {
+        font-size: 2em; /* Adjust font size for smaller screens */
+    }
+}
+
+/* Keyframes for pulsing effect */
+@keyframes pulseText {
+    0%, 100% {
+        transform: scale(1);
+        color: #007bff;
+    }
+    50% {
+        transform: scale(1.1);
+        color: #00d4ff;
+    }
+}
+
+/* Keyframes for wavy effect */
+@keyframes waveText {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(10px);
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Features Section */
+.features-section {
+    padding: 50px 30px;
+    background: white;
+    position: relative;
+    background-size: 100%;
+}
+
+.features-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    text-align: center;
+
+    text-shadow: 
+    -3px -3px 0 white, /* Top-left */
+    3px -3px 0 white,  /* Top-right */
+    -3px 3px 0 white,  /* Bottom-left */
+    3px 3px 0 white;   /* Bottom-right */
+}
+
+.overlay-image-2 {
+    position: absolute;
+    bottom: 20px; /* Adjust the vertical position */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset for perfect centering */
+    max-width: 42%; /* Scale the image size */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 0; /* Ensure it's above the background but below other content */
+    opacity: 0.4; /* Optional: Make it slightly transparent */
+}
+
+/* Content (Text) */
+.content {
+    z-index: 2; /* Ensure text appears above the overlay image */
+    color: #fff; /* Contrast with the overlay */
+}
+
+
+.feature-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.feature-box {
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.feature-box .feature-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+}
+
+.feature-box .feature-text {
+    margin-left: 20px;
+}
+
+.feature-box .feature-text h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.feature-box .feature-text p {
+    margin-top: 10px;
+}
+
+
+/* About Our Company Section */
+.company-details {
+    padding: 30px 20px;
+    position: relative;
+    align-items: center;
+    max-width: 100%;
+    max-height: 80%;
+    background-size: cover;
+}
+
+/* Section Title */
+.company-details h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Company Detail Boxes */
+.company-detail-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.company-detail-box {
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    opacity: 0; /* Initially hidden */
+    animation: slideIn 1s forwards;
+    overflow: hidden;
+}
+
+.company-detail-box:nth-child(odd) {
+    flex-direction: row-reverse; /* Text on the left, image on the right for odd child */
+}
+
+.company-detail-box:nth-child(even) {
+    flex-direction: row; /* Text on the right, image on the left for even child */
+}
+
+/* Company Text */
+.company-detail-box .company-text {
+    margin: auto;
+    max-width: auto;
+    padding: 10px;
+    text-align: left;
+    font-size: 1.2em;
+    line-height: 1.2;
+    color: #555;
+    animation: slideTextRight 1s ease-in-out forwards;
+}
+
+/* Company Image */
+.company-detail-box .company-image {
+    flex-shrink: 0;
+    max-width: 200px;
+    max-height: 200px;
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    animation: fadeInImage 1s ease-in-out forwards;
+}
+
+.company-detail-box .company-image img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+}
+
+/* Keyframes for Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideTextRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Utility Classes for Animations */
+.animate-fade-in {
+    animation: fade-in 1.5s ease-in-out forwards;
+}
+
+.animate-slide-in {
+    animation: slide-in 1.5s ease-in-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .company-detail-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .company-detail-box .company-image {
+        margin-bottom: 20px;
+    }
+
+    .company-detail-box .company-text {
+        max-width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-details h2 {
+        font-size: 2em;
+    }
+
+    .company-detail-box {
+        padding: 15px;
+    }
+
+    .company-detail-box .company-image {
+        max-width: 100px;
+        max-height: 100px;
+        height: 100px;
+        width: 100px;
+    }
+
+    .company-detail-box .company-text {
+        font-size: 0.9em;
+    }
+}
+

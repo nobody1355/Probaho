@@ -1,0 +1,48 @@
+<!--TIG Added Line 14-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Login</title>
+
+    <!-- Link to the login page style.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <!-- Floating Header (same as index, without login button) -->
+    {% include 'auth/header.html' %}   
+
+    <!-- Login Form Container -->
+    <div class="container">
+        <h1>Login</h1>
+        <form method="POST">
+            <!-- Username Input -->
+            <input type="text" name="username" placeholder="Username" required>
+            <!-- Password Input -->
+            <input type="password" name="password" placeholder="Password" required>
+            <!-- Submit Button -->
+            <button type="submit">Login</button>
+        </form>
+        <!-- Forgot Password Link -->
+        <div style="margin-top: 10px;">
+            <a href="{{ url_for('auth.forgot_password') }}" style="text-decoration: none; color: #007BFF;">Forgot Password?</a>
+        </div>
+
+        <!-- Flash Messages (if any) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Sign Up Link -->
+        <p>Don't have an account? <a href="{{ url_for('auth.register') }}" class="sign-up-btn">Sign Up</a></p>
+    </div>
+</body>
+</html>

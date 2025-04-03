@@ -1,0 +1,15 @@
+/* Inside css/index.css */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0px; /* Space between the icon and the text */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-icon {
+    width: 30px; /* Adjust the size of the icon */
+    height: auto; /* Maintain aspect ratio */
+}

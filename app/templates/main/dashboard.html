@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Dashboard - Probaho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='javascript/dashboard.js') }}" defer></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    {% include 'sidebar/sidebar.html' %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header-title">Dashboard</h1>
+            <div class="header-right">
+                <div class="header-date-time" id="date-time"></div>
+                <div class="user-btn">
+                    <img src="images/userimage/user_1.jpg" alt="User Image" class="user-img">
+                    <!--<img src="{{ url_for('static', filename='images/userimage/user_1.jpg') }}" class="user_img">-->
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Cards Section -->
+        <section class="cards">
+            <div class="card blue-card">
+                <h3>Sales</h3>
+                <p>Tk {{ card_data['sales'] }}</p>
+                <i class="icon icon-sales"></i>
+            </div>
+            <div class="card blue-card">
+                <h3>Orders</h3>
+                <p>{{ card_data['orders'] }}</p>
+                <i class="icon icon-orders"></i>
+            </div>
+            <div class="card blue-card">
+                <h3>Products</h3>
+                <p>{{ card_data['products'] }}</p>
+                <i class="icon icon-products"></i>
+            </div>
+            <div class="card blue-card">
+                <h3>Staff</h3>
+                <p>{{ card_data['staff'] }}</p>
+                <i class="icon icon-staff"></i>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts">
+            <div class="chart-container">
+                <h2>Monthly Sales</h2>
+                <canvas id="salesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Most Demanding Products</h2>
+                <canvas id="demandingChart"></canvas>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

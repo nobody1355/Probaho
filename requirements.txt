@@ -1,0 +1,25 @@
+# Installation Instructions:
+# To install the dependencies listed in this file, run the following command:
+#
+# pip install -r requirements.txt
+#
+# This command will ensure all necessary packages and their specified versions are installed in your environment.
+
+# Core Framework
+Flask==2.2.2                    # Lightweight web framework for building scalable applications
+
+# Database Integration
+Flask-SQLAlchemy==2.5.1         # Integration of SQLAlchemy ORM with Flask
+mysqlclient==2.1.1              # MySQL database connector for Python
+flask-mysqldb                   # Simplified MySQL integration for Flask
+
+# User Authentication and Security
+Flask-Login==0.6.2              # User authentication, login, and session management
+
+# Email Support
+Flask-Mail==0.9.1               # Email support for Flask applications
+
+# Core Toolkit
+werkzeug>=2.0.0                 # WSGI toolkit used by Flask for request/response handling
+
+

@@ -1,0 +1,737 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Layout */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: #f5f5f5;
+}
+
+.sidebar {
+    background: linear-gradient(180deg, #007BFF, #5BC0EB);
+    color: #fff;
+    width: 20.2%;
+    height: fill;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .logo {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    width: 100%;
+    padding-left: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.sidebar nav ul li a:hover {
+    background: #0056b3;
+    transform: translateX(10px);
+}
+
+/* Fixed Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 20.5%;
+    right: 0;
+    z-index: 1;
+    width: 75%;
+    margin-top: 10px;
+    margin-bottom: 0; /* No bottom margin for header itself */
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* User Menu */
+.user-btn {
+    position: relative;
+}
+
+.user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px; /* Align with the bottom of the user menu button */
+    left: 0;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 150px;
+    z-index: 1000;
+}
+
+.user-dropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-dropdown ul li {
+    margin: 10px 0;
+}
+
+.user-dropdown ul li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.user-btn:hover .user-dropdown {
+    display: block;
+}
+
+/* Date and Time */
+#date-time {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: right;
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #007BFF, #5BC0EB);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Content */
+.container {
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 40px;
+    width: 100%;
+    margin-top: 100px;
+    padding-left: 0;
+}
+
+#search_container {
+    margin-top: 10%;
+}
+
+
+.search_section {
+    width: 50%;
+    margin-top: 15px;
+    display: flex; /* Use Flexbox to align items horizontally */
+    align-items: center; /* Align items vertically in the center */
+}
+
+.search_section input {
+    flex: 1; /* Make the input take as much width as possible */
+    margin-right: 10px; /* Add some space between the input and button */
+}
+
+.search_section button {
+    flex-shrink: 0; /* Prevent the button from shrinking */
+}
+
+
+/* Cart Section */
+#selected-products-list {
+    list-style: none;
+    padding: 0;
+}
+
+#selected-products-list .list-group-item {
+    background-color: rgba(248, 249, 250, 0.8);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#selected-products-list .remove-item-btn {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+#selected-products-list .remove-item-btn:hover {
+    background-color: #c82333;
+}
+
+.search_section{
+    width: 50%;
+    margin-top: 15px;
+}
+.customer_info{
+    width:50%;
+    margin-top: 15px;
+}
+
+
+
+.Available_Products {
+    margin-top: -30.99%;
+    padding: 15px;
+    width:75%;
+    background-color: rgba(0, 123, 255, 0.3);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Product Card Styles */
+.card {
+    background: rgba(39, 255, 93, 0.318);
+    border: 1px solid rgba(9, 8, 2, 0.716);
+    border-radius: 8px;
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    max-width: 220px; /* make the card smaller */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-header{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-top: -20px;
+    font-weight: 700;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 1.2rem; /* Smaller font size */
+    font-weight: 600;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+.card-text{
+    font-size: 0.75rem; /* Smaller font size */
+    font-weight: 600;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+/* Card Body */
+.card-body {
+    width: 75%;
+    height: auto;
+    font-size: 0.75rem; /* Smaller font size */
+    font-weight: 600;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+#product-quantity-box{
+    align-items: center;
+    width: 50%;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #218838;
+}
+
+/* Quantity Input */
+input[type="number"] {
+    width: 50%;
+    padding: 5px;
+    font-size: 0.7rem;
+    border-radius: 5px;
+    border: 1px solid #007BFF;
+    box-sizing: border-box;
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Scanner Section */
+#scanner-container {
+    margin-left: 74%;
+    margin-right: 20px;
+    margin-top: -60px;
+    padding-top: 0;
+    width: 25%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#scanner {
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    margin-top: 0;
+    padding: 10px;
+}
+
+#result, #productBarcode {
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    background-color: rgba(248, 249, 250, 0.7);
+    border: 1px solid rgba(0, 123, 255, 0.3);
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    color: #007BFF;
+}
+
+#rescan-btn {
+    display: none;
+}
+
+#checkout-btn {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+#checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/* Layout for Scanner and Product Cards */
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col-md-6 {
+    width: 100%; /* Default to full width on small screens */
+}
+
+.col-md-6#scanner-container {
+    width: 48%; /* Scanner takes up half the width */
+    margin-top: 20px;
+}
+
+.col-md-6#selected-products-list {
+    width: 48%; /* Cart section */
+    margin-top: 20px;
+}
+
+.card {
+    width: 100%; /* Make product cards stretch across full width */
+    margin-bottom: 15px;
+}
+
+
+/* Bill Modal Styling */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    max-width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1000;
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid #ccc;
+}
+
+.btn-close {
+
+    border: #bd2130;
+    color: #fbff00; /* Updated color for the close button */
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.btn-close:hover {
+    color: #bd2130;
+}
+
+
+.modal-dialog {
+    margin: 0;
+    padding: 0;
+}
+
+/* Modal Content */
+.modal-content {
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+
+
+
+
+/* Modal Body */
+.modal-body {
+    padding: 20px;
+}
+
+.customer-info p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.customer-info span {
+    font-weight: bold;
+}
+
+/* Bill Items List */
+#bill-items-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+#bill-items-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+#bill-items-list li:last-child {
+    border-bottom: none;
+}
+
+#bill-total {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Footer Buttons */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 10px 10px;
+}
+
+
+
+#print-bill-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#print-bill-btn:hover {
+    background-color: #0056b3;
+}
+
+
+@media print {
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #fff;
+        color: #000;
+    }
+    .print-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        max-width: 600px;
+    }
+    .print-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .print-header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .print-header p {
+        margin: 0;
+        font-size: 14px;
+    }
+    .customer-info {
+        margin-bottom: 20px;
+    }
+    .customer-info p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+    .items-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    .items-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #ccc;
+    }
+    .items-list li:last-child {
+        border-bottom: none;
+    }
+    .items-list .item-name {
+        flex: 2;
+        font-size: 14px;
+    }
+    .items-list .item-price,
+    .items-list .item-quantity {
+        flex: 1;
+        text-align: right;
+        font-size: 14px;
+    }
+    .total-section {
+        margin-top: 20px;
+        text-align: right;
+    }
+    .total-section strong {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .print-footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 14px;
+        color: #888;
+    }
+    .no-print {
+        display: none;
+    }
+}
+
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Backdrop */
+.modal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+
+
+/* Responsive Layout */
+/* For small devices (phones, less than 768px) */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+    }
+
+    .header {
+        left: 0;
+        width: 100%;
+        margin-top: 0;
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .container {
+        margin-top: 80px;
+        padding: 10px;
+    }
+
+    #scanner-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .Available_Products {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+}
+
+/* For medium devices (tablets, 768px to 992px) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .sidebar {
+        width: 25%;
+    }
+
+    .header {
+        left: 25%;
+        width: 75%;
+    }
+
+    #scanner-container {
+        width: 50%;
+        margin: auto;
+    }
+
+    .Available_Products {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .row {
+        flex-wrap: wrap;
+    }
+
+    .card {
+        max-width: 180px;
+        margin: 10px auto;
+    }
+}
+
+/* For large devices (desktop, more than 992px) */
+@media (min-width: 992px) {
+    .sidebar {
+        width: 20.2%;
+    }
+
+    .header {
+        left: 20.5%;
+        width: 75%;
+    }
+
+    #scanner-container {
+        width: 25%;
+    }
+
+    .Available_Products {
+        width: 75%;
+    }
+
+    .card {
+        max-width: 220px;
+    }
+}

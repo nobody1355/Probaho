@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Features - Probaho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/features.css') }}">
+</head>
+<body>
+    <!-- Floating Header Section -->
+     <section>
+        <header class="floating-header">
+            {% include 'headerindex.html' %}
+        </header>
+     </section>
+
+    
+    <!-- Main Content Section -->
+    <main>
+        <!-- Common Features Section -->
+        <section class="common-features">
+            <h2>Essentials to Elevate Your Business!</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Inventory Mastery Suite</h3>
+                    <p>Track stock levels, incoming orders, and product restocks</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Live Updates</h3>
+                    <p>Stay on top of operations with real-time insights</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Billing Hub</h3>
+                    <p>Manage invoices, transactions, and customer payments</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Messaging</h3>
+                    <p>Engage in direct customer support through built-in messaging</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurant Features Section -->
+        <section class="restaurant-features">
+            <h2>Savory Excellence: Restaurant Pro Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Menu Manager</h3>
+                    <p>Design and update your digital menu with ease</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Reservations</h3>
+                    <p>Reservation and seating arrangements made simpler</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Order Board</h3>
+                    <p>Real-time order tracking to optimize meal prep</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Dining Delight Feedback</h3>
+                    <p>Instant customer reviews for consistent improvement</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grocery Features Section -->
+        <section class="grocery-features">
+            <h2>Market Marvel: Grocery Pro Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Fresh Stock Automation</h3>
+                    <p>Automated alerts for expiring or low-stock items</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Basket Saver</h3>
+                    <p>Discount application and campaign tracking</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Product Sorting</h3>
+                    <p>Smart categorization of items for easy shopping</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pharmacy Features Section -->
+        <section class="pharmacy-features">
+            <h2>Health Boost: Pharmacy Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Medical Tracking Manager</h3>
+                    <p>Complete control over prescriptions and stock</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Dosage Advisor</h3>
+                    <p>Enable safe and accurate medication guidelines</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Pharma-Care Analytics</h3>
+                    <p>Powerful reporting to optimize inventory and trends</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Probaho WebApp. All rights reserved. UH, UBM, TIG, NUA, RAR</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+<div class="sidebar">
+    <h2 class="logo">
+        <img src="{{ url_for('static', filename='images/ProbahoLogo2.png') }}" alt="Probaho Logo" class="logo-icon">
+        robaho
+    </h2>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('dashboard.show_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('category.show_categories') }}">Category</a></li>
+            <li><a href="{{ url_for('products.show_products') }}">Products</a></li>
+            <li><a href="{{ url_for('pos.point_of_sale') }}">POS</a></li>
+            <li><a href="{{ url_for('staff.show_staff') }}">Staff</a></li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Documentation - Probaho</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/documentation.css') }}">
+</head>
+
+<body>
+    <!-- Floating Header Section -->
+    <section>
+        <header class="floating-header">
+            {% include 'headerindex.html' %}
+        </header>
+     </section>
+
+    <main>
+        <section class="documentation">
+            <h1>Documentation</h1>
+            <p>Welcome to the Probaho Documentation! Here you can find information on how to use the app.</p>
+
+            <h2>Getting Started</h2>
+            <p>Details about registration, logging in, and navigating the app.</p>
+
+            <h2>Features Explained</h2>
+            <p>Guides for using features like job posting, messaging, and payments.</p>
+
+            <h2>FAQs</h2>
+            <p>Answers to frequently asked questions.</p>
+
+            <h2>Support</h2>
+            <p>If you need further assistance, contact us at <a href="mailto:support@probaho.com">support@probaho.com</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Probaho WebApp. All rights reserved. UH, UBM, TIG, NUA, RAR</p>
+    </footer>
+</body>
+</html>

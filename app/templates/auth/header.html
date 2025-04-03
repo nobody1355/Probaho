@@ -1,0 +1,17 @@
+<!-- app\templates\auth\header.html -->
+ <!-- I have separated header part for better view-Umair -->
+
+<header class="floating-header">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
+    <div class="logo-text">
+        <a href="{{ url_for('main.home') }}" class="logo-link">
+            <img src="{{ url_for('static', filename='images/ProbahoLogo2.png') }}" alt="Logo" class="logo">
+            <h1>robaho</h1>
+        </a>
+    </div>
+    <div class="center-links">
+        <a href="{{ url_for('main.features') }}" class="link">Features</a>
+        <a href="{{ url_for('main.documentation') }}" class="link">Documentation</a>
+        <a href="{{ url_for('main.support') }}" class="link">Support</a>
+    </div>
+</header>

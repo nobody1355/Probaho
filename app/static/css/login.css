@@ -1,0 +1,221 @@
+/* static/css/login.css */
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling - Set background image */
+body {
+    font-family: Arial, sans-serif;
+    background: url("/static/images/login_register/Background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative; /* Allow header to float over the content */
+}
+
+/* Floating Header */
+.floating-header {
+    background: linear-gradient(to right, #007bff 0%, #ffffff 100%); /* Gradient from blue to white */
+    padding: 30px 30px; /* Increased padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 30px; /* Added space from the top */
+    left: 85px; /* Added space from the left */
+    right: 25px; /* Added space from the right */
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    opacity: 0.95; /* Slight fade effect */
+    width: 85%;
+}
+
+/* Ensure Probaho text is white */
+.floating-header h1 {
+    color: rgb(255, 255, 255);  /* Set the text color to white */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Ensure no extra margin around the text */
+    line-height: 1; /* Ensures proper alignment with the logo */
+}
+
+/* Logo and Text */
+.logo-text a {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Ensures it inherits the color of the parent element */
+    display: flex; /* Aligns logo and text properly */
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.center-links {
+    display: flex;
+    gap: 20px;
+}
+
+.center-links .link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+
+    text-shadow: 
+    -1.5px -1.5px 0 white, /* Top-left */
+    1.5px -1.5px 0 white,  /* Top-right */
+    -1.5px 1.5px 0 white,  /* Bottom-left */
+    1.5px 1.5px 0 white;   /* Bottom-right */
+}
+
+/* Hover effects for navigation links */
+.center-links .link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.center-links .link:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.center-links .link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Login Container - White box with transparency */
+.container {
+    width: 100%;
+    max-width: 450px; /* Maximum width of container */
+    background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Title Styling */
+h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #007bff;
+}
+
+/* Input Fields */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Focus Effect for Input Fields */
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05); /* Grow on focus */
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px; 
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Grow on hover */
+}
+
+/* Sign Up Button Styling */
+.sign-up-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Sign Up Button Hover Effect */
+.sign-up-btn:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Message Display for Flash Messages */
+ul {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+ul li {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design: */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    input[type="text"], input[type="password"], button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Adjust floating header on smaller screens */
+    .floating-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .floating-header .center-links {
+        flex-direction: column;
+    }
+
+    .floating-header .header-buttons {
+        margin-top: 10px;
+    }
+}

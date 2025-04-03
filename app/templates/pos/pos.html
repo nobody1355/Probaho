@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>POS System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pos.css') }}">
+    <script src="{{ url_for('static', filename='javascript/date-time.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/dashboard.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/products.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/pos.js') }}" defer></script>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    {% include 'sidebar/sidebar.html' %}
+
+    <div class="header_align">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header-title">POS System</h1>
+            <div class="header-right">
+                <div class="header-date-time" id="date-time"></div> <!-- Date and Time display -->
+                <div class="user-btn">
+                    <img src="images/user.jpg" alt="User Image" class="user-img">
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="container mt-4">
+        <form method="POST" class="mb-4" id="search_container">
+            <div class="row mb-4">
+
+                <!-- Customer Information Section -->
+                <div class="customer_info">
+                    <input type="text" id="customer_name" name="customer_name" class="form-control"
+                        placeholder="Customer Name (Optional)">
+                </div>
+                <div class="customer_info">
+                    <input type="text" id="customer_mobile" name="customer_mobile" class="form-control"
+                        placeholder="Mobile (Optional)">
+                </div>
+                <div class="customer_info">
+                    <input type="text" id="customer_address" name="customer_address" class="form-control"
+                        placeholder="Address (Optional)">
+                </div>
+                <div class="customer_info">
+                    <input type="email" id="customer_email" name="customer_email" class="form-control"
+                        placeholder="Email (Optional)">
+                </div>
+                <!-- Search Section -->
+                <div class="search_section">
+                    <form method="GET" action="/pos">
+                        <input type="text" name="search_query" class="form-control"
+                            placeholder="Search by product Name or Barcode">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+
+            </div>
+        </form>
+
+        <!-- Scanner Section -->
+        <div id="scanner-container">
+            <div class="scanner_alignment">
+                {% include 'POS/scanner.html' %}
+            </div>
+        </div>
+
+        <!-- Product List Section -->
+        <div class="Available_Products">
+            <div class="card-header">Available Products</div>
+            <div class="card-body">
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <div class="card product-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product[1] }}</h5>
+                                <p class="card-text">Price: Tk {{ product[2] }}</p>
+                                <p class="card-text">Stock: {{ product[3] }}</p>
+                                <input type="number" class="product-quantity-box" placeholder="Quantity" min="1"
+                                    id="quantity_{{ product[0] }}">
+                                <button class="btn btn-success add-to-cart-btn" data-product-id="{{ product[0] }}"
+                                    data-product-name="{{ product[1] }}" data-price="{{ product[2] }}">Add to
+                                    Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Row for Scanner and Cart Sections -->
+        <div class="row">
+            <!-- Cart Section -->
+            <div class="col-md-6">
+                <div class="mb-4">
+                    <h3>Cart</h3>
+                    <!-- Selected Products List -->
+                    <ul id="selected-products-list" class="list-group"></ul>
+                    <!-- Cart Total -->
+                    <div class="d-flex justify-content-between">
+                        <strong>Total: Tk <span id="cart-total">0</span></strong>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <button id="checkout-btn" class="btn btn-success">Checkout</button>
+                    <!-- Bill Modal -->
+                    <div id="bill-modal" class="modal" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center w-100">Receipt</h5>
+                                    <button id="close-bill-btn" class="btn-close" aria-label="Close"></button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                    <!-- Bill Items Section -->
+                                    <h6 class="text-muted">Purchased Items:</h6>
+                                    <ul id="bill-items-list" class="list-group mb-3">
+                                        <!-- Dynamically inserted bill items -->
+                                    </ul>
+
+                                    <!-- Total Section -->
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <strong>Total:</strong>
+                                        <h5 class="text-black">Tk <span id="bill-total"></span></h5>
+                                    </div>
+
+                                    <!-- Paid Amount Input -->
+                                    <div class="mb-3">
+                                        <label for="paid-amount" class="form-label">Paid Amount:</label>
+                                        <input type="text" id="paid-amount" class="form-control" placeholder="Enter amount paid">
+                                    </div>                                    
+
+                                    <!-- Change Display -->
+                                    <div class="mb-3">
+                                        <label for="change" class="form-label">Change:</label>
+                                        <input type="text" id="change" class="form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button onclick="prepareBill()" id="print-bill-btn" class="btn btn-primary">Print
+                                        Receipt</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Print functionality
+        document.getElementById('print-bill-btn').addEventListener('click', function () {
+
+
+            const billContent = document.getElementById('bill-modal');
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Receipt</title>');
+
+            // Add blue-themed styles
+            printWindow.document.write(`
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 20px;
+        }
+        h2 {
+            color: #007bff;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        strong {
+            color: #007bff;
+        }
+        .customer-info {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            background-color: #e7f1ff;
+        }
+        .product-info {
+            margin-top: 20px;
+        }
+        .bill-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        .bill-items li {
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 16px;
+            color: #007bff;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head><body>`);
+
+            // Get customer info from the form
+            const customerName = document.getElementById('customer_name').value || 'N/A';
+            const customerMobile = document.getElementById('customer_mobile').value || 'N/A';
+            const customerAddress = document.getElementById('customer_address').value || 'N/A';
+            const customerEmail = document.getElementById('customer_email').value || 'N/A';
+
+            // Print customer info
+            printWindow.document.write(`<h2>Customer Info</h2>`);
+            printWindow.document.write(`<div class="customer-info">`);
+            printWindow.document.write(`<p><strong>Name:</strong> ${customerName}</p>`);
+            printWindow.document.write(`<p><strong>Mobile:</strong> ${customerMobile}</p>`);
+            printWindow.document.write(`<p><strong>Address:</strong> ${customerAddress}</p>`);
+            printWindow.document.write(`<p><strong>Email:</strong> ${customerEmail}</p>`);
+            printWindow.document.write(`</div>`);
+
+            // Insert bill items from the modal
+            printWindow.document.write(`<h2>Product Info</h2>`);
+            const billItemsList = document.getElementById('bill-items-list');
+            printWindow.document.write(`<ul class="bill-items">${billItemsList.innerHTML}</ul>`);
+
+            // Get the total from the modal and insert it
+            const billTotal = document.getElementById('bill-total').innerText || '0.00';
+            printWindow.document.write(`<p class="total"><strong>Total:</strong> Tk ${billTotal}</p>`);
+
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+
+        // Prepare Bill for Checkout
+        function prepareBill() {
+            const cartItems = [];
+            const selectedProducts = document.querySelectorAll('#selected-products-list li');
+
+            // Collect data for the cart
+            selectedProducts.forEach((item) => {
+                const productId = item.getAttribute('data-product-id');
+                const quantity = parseInt(item.getAttribute('data-product-quantity'));
+                const price = parseFloat(item.getAttribute('data-product-price'));
+
+                // Ensure valid data
+                if (productId && !isNaN(quantity) && !isNaN(price)) {
+                    cartItems.push({
+                        product_id: productId,
+                        quantity: quantity,
+                        price: price,
+                    });
+                }
+            });
+
+            const cartTotal = parseFloat(document.getElementById('cart-total').innerText) || 0;
+
+            // Send data to the backend
+            fetch('/pos/prepareBill', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customer_name: document.getElementById('customer_name').value,
+                    customer_mobile: document.getElementById('customer_mobile').value,
+                    customer_address: document.getElementById('customer_address').value,
+                    customer_email: document.getElementById('customer_email').value,
+                    cart_items: cartItems,
+                    total_amount: cartTotal,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(`Bill prepared successfully! Bill ID: ${data.bill_id}`);
+                    } else {
+                        alert(`Error: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while preparing the bill.');
+                });
+        }
+        // Close bill modal functionality
+        document.getElementById('close-bill-btn').addEventListener('click', function () {
+            document.getElementById('bill-modal').style.display = 'none';
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    scroll-behavior: smooth;
+    background-size: cover;
+    background-position: center;
+    transition: background 1s ease-in-out;
+}
+
+/* Floating Header */
+.floating-header {
+    background: linear-gradient(to right, #007bff 0%, #ffffff 100%); /* Gradient from blue to white */
+    padding: 30px 30px; /* Increased padding for more space */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 30px; /* Added space from the top */
+    left: 85px; /* Added space from the left */
+    right: 25px; /* Added space from the right */
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Rounded corners */
+    opacity: 0.95; /* Slight fade effect */
+    width: 85%;
+}
+
+/* Ensure Probaho text is white */
+.floating-header h1 {
+    color: rgb(255, 255, 255);  /* Set the text color to white */
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Ensure no extra margin around the text */
+    line-height: 1; /* Ensures proper alignment with the logo */
+}
+
+/* Logo and Text */
+.logo-text a {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Ensures it inherits the color of the parent element */
+    display: flex; /* Aligns logo and text properly */
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Navigation Links */
+.center-links {
+    display: flex;
+    gap: 20px;
+}
+
+.center-links .link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    position: relative;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects for navigation links */
+.center-links .link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.center-links .link:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.center-links .link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Header Buttons */
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons .btn {
+    text-decoration: none;
+    color: #ffffff;
+    background: #007BFF;
+    padding: 10px 20px;
+    border-radius: 30px; /* Rounded button shape */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for the button */
+    transition: background 0.3s, transform 0.3s;
+}
+
+/* Hover effects for buttons */
+.header-buttons .btn:hover {
+    text-decoration: none;
+    color: #007BFF;
+    background: #ffffff;
+    transform: translateY(-3px); /* Button lift effect */
+}
+
+.header-buttons .btn:active {
+    transform: translateY(1px); /* Button press effect */
+}
+
+/* Feature Cards Layout */
+.feature-cards {
+    display: flex;              /* Use flexbox to center align */
+    flex-wrap: wrap;            /* Allow wrapping of cards */
+    justify-content: center;    /* Center the cards horizontally */
+    gap: 20px;                  /* Space between the cards */
+    margin-top: 50px;           /* Added margin to create gap after the floating header */
+    padding: 0 20px;            /* Added padding for better spacing */
+    max-width: 1200px;          /* Optional: Max width to avoid too wide a layout */
+    margin-left: auto;
+    margin-right: auto;         /* Center the cards container */
+}
+
+/* Feature Card Styling */
+.feature-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: auto;
+    height: auto;
+    width: 100%;                /* Make each card take full width within the container */
+    max-width: 300px;           /* Optional: Max width for cards to avoid stretching */
+}
+
+/* Feature Card Title Styling */
+.feature-card h3 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Feature Card Description Styling */
+.feature-card p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Hover Effects for Feature Cards */
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Section Styles */
+section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f4f7fc;
+    margin-top: auto;
+}
+
+section h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+section p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #007bff;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+    section p {
+        font-size: 16px;
+    }
+}

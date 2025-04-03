@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/ProbahoLogo3.ico') }}">
+    <title>Manage Categories</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}">
+    <script src="{{ url_for('static', filename='javascript/date-time.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='javascript/dashboard.js') }}" defer></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    {% include 'sidebar/sidebar.html' %}
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="header-title">Categories</h1>
+            <div class="header-right">
+                <div class="header-date-time" id="date-time"></div>
+                <div class="user-btn">
+                    <img src="images/user.jpg" alt="User Image" class="user-img">
+                    <div class="user-dropdown">
+                        <ul>
+                            <li><a href="#profile">Profile</a></li>
+                            <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container mt-5">
+            <h1 class="mb-4">Manage Categories</h1>
+
+            <!-- Row for Add Category and Search Category -->
+            <div class="row mb-4">
+                <!-- Add Category Form -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Add Category</div>
+                        <div class="card-body">
+                            <form action="{{ url_for('category.add_category') }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="categoryName" class="form-label">Category Name</label>
+                                    <input type="text" class="form-control" id="categoryName" name="catName" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Category</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Category Form -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Search Category</div>
+                        <div class="card-body">
+                            <form action="{{ url_for('category.search_category') }}" method="GET">
+                                <div class="mb-3">
+                                    <label for="searchCategory" class="form-label">Category Name</label>
+                                    <input type="text" class="form-control" id="searchCategory" name="searchTerm" placeholder="Search Categories">
+                                </div>
+                                <button type="submit" class="btn btn-info">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Existing Categories -->
+            <h2 class="mb-4">Existing Categories</h2>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>S.L</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{  loop.index }}</td> <!-- catID -->
+                        <td>{{ category[1] }}</td> <!-- catName -->
+                        <td>
+                            <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editCategoryModal" 
+                                    data-id="{{ category[0] }}" data-name="{{ category[1] }}">
+                                Edit
+                            </button>
+
+                            <form action="{{ url_for('category.delete_category', cat_id=category[0]) }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Category Modal -->
+        <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url_for('category.edit_category') }}" method="POST">
+                        <div class="modal-body">
+                            <input type="hidden" id="editCategoryId" name="catID">
+                            <div class="mb-3">
+                                <label for="editCategoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="editCategoryName" name="catName" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const editCategoryModal = document.getElementById('editCategoryModal');
+        editCategoryModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+
+            document.getElementById('editCategoryId').value = id;
+            document.getElementById('editCategoryName').value = name;
+        });
+    </script>
+</body>
+</html>
