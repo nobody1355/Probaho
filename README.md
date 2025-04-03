@@ -35,3 +35,9 @@ Database: MySQL (Flask-MySQLdb)
 Frontend: HTML, CSS, JavaScript
 
 Email Services: Flask-Mail (SMTP for password recovery)
+
+=====================================================================================================
+
+*Install the packages mentioned in requirements.txt*
+*Install Xampp for database management*
+*Probaho was developed using Visual Studio Code*
