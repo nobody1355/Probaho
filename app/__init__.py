@@ -24,9 +24,9 @@ def create_app():
     app.config['MAIL_PORT'] = 465
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USERNAME'] = 'probaho.app@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'asrl enty bjks pxmm'
-    app.config['MAIL_DEFAULT_SENDER'] = 'probaho.app@gmail.com'
+    app.config['MAIL_USERNAME'] = 'EMAIL@Gmail.com'
+    app.config['MAIL_PASSWORD'] = 'Pass Wor d'
+    app.config['MAIL_DEFAULT_SENDER'] = 'EMAIL@Gmail.com'
 
     # Initialize MySQL and Mail with the app
     mysql.init_app(app)
